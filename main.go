@@ -31,6 +31,7 @@ func main() {
 	http.HandleFunc("/delete", deleteHandler)
 	http.HandleFunc("/save", saveHandler)
 	http.HandleFunc("/load", readHandler)
+	http.HandleFunc("/deleteAll", deleteAllHandler)
 	http.Handle("/static/", http.StripPrefix("/static/", http.FileServer(http.Dir("static"))))
 
 	http.ListenAndServe(":8080", nil)
@@ -73,6 +74,17 @@ func deleteHandler(w http.ResponseWriter, r *http.Request) {
 			}
 			tasks.Unlock()
 		}
+	}
+	http.Redirect(w, r, "/", http.StatusSeeOther)
+}
+
+func deleteAllHandler(w http.ResponseWriter, r *http.Request) {
+	if r.Method == http.MethodPost {
+		tasks.Lock()
+		if len(tasks.Tasks) >= 0 {
+			tasks.Tasks = nil
+		}
+		tasks.Unlock()
 	}
 	http.Redirect(w, r, "/", http.StatusSeeOther)
 }
