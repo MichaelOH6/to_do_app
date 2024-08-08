@@ -98,7 +98,7 @@ func TestDeleteAllHandler(t *testing.T) {
 		},
 	}
 
-	// Create a POST request to delete the task at index 1
+	// Create a POST request to delete all the tasks
 	form := url.Values{}
 	form.Add("index", "1")
 	req, err := http.NewRequest(http.MethodPost, "/deleteAll", strings.NewReader(form.Encode()))
@@ -119,7 +119,7 @@ func TestDeleteAllHandler(t *testing.T) {
 		t.Errorf("handler returned wrong status code: got %v want %v", status, http.StatusSeeOther)
 	}
 
-	// Check if the task was deleted
+	// Check if the tasks was deleted
 	if len(tasks.Tasks) != 0 {
 		t.Errorf("handler did not delete task: got %v want %v", len(tasks.Tasks), 0)
 	}
