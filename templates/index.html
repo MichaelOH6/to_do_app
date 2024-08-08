@@ -7,30 +7,43 @@
     <link rel="stylesheet" href="/static/style.css">
 </head>
 <body>
-    <h1>To-Do List</h1>
-    <form action="/load" method="post">
-        <button type="submit">load</button>
-    </form>
-    <form action="/save" method="post">
-        <button type="submit">save</button>
-        <h1 name="error"></h1>
-    </form>
-    <form action="/add" method="post">
-        <input type="text" name="task" placeholder="Enter new task" required>
-        <button type="submit">Add Task</button>
-    </form>
-    <ul>
-        {{range $index, $task := .}}
-        <li>
-            {{.Name}}
-            <form action="/delete" method="post" style="display:inline;">
-                <input type="hidden" name="index" value="{{$index}}">
-                <button type="submit">Delete</button>
+    <div class="container">
+        <header>
+            <h1>My To-Do List</h1>
+        </header>
+        
+        <section class="controls">
+            <form action="/load" method="post">
+                <button type="submit" class="control-btn">Load Tasks</button>
             </form>
-        </li>
-        {{else}}
-        <li>No tasks yet</li>
-        {{end}}
-    </ul>
+            <form action="deleteAll" method="post">
+                <button type="submit" class="delete-btn">Delete All</button>
+            </form>
+            <form action="/save" method="post">
+                <button type="submit" class="control-btn">Save Tasks</button>
+                <h1 name="error" class="error"></h1>
+            </form>
+            <form action="/add" method="post" class="add-form">
+                <input type="text" name="task" placeholder="Enter new task" required>
+                <button type="submit">Add Task</button>
+            </form>
+        </section>
+        
+        <section class="tasks">
+            <ul>
+                {{range $index, $task := .}}
+                <li class="task-item">
+                    <span>{{.Name}}</span>
+                    <form action="/delete" method="post" class="delete-form">
+                        <input type="hidden" name="index" value="{{$index}}">
+                        <button type="submit" class="delete-btn">Delete</button>
+                    </form>
+                </li>
+                {{else}}
+                <li class="task-item empty">No tasks yet</li>
+                {{end}}
+            </ul>
+        </section>
+    </div>
 </body>
 </html>
