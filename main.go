@@ -35,9 +35,9 @@ func main() {
 	http.HandleFunc("/load", readHandler)
 	http.HandleFunc("/deleteAll", deleteAllHandler)
 	http.Handle("/static/", http.StripPrefix("/static/", http.FileServer(http.Dir("static"))))
+	fmt.Println("server started on port http://localhost:8080/")
 
 	http.ListenAndServe(":8080", nil)
-	fmt.Println("server started on port http://localhost:8080/")
 }
 
 func check(e error) {
@@ -59,6 +59,7 @@ func addHandler(w http.ResponseWriter, r *http.Request) {
 			tasks.Lock()
 			if len(tasks.Tasks) < 10 {
 				tasks.Tasks = append(tasks.Tasks, Task{Name: taskName})
+				fmt.Println("Task added to list")
 			}
 			tasks.Unlock()
 		}
@@ -74,6 +75,7 @@ func deleteHandler(w http.ResponseWriter, r *http.Request) {
 			tasks.Lock()
 			if index >= 0 && index < len(tasks.Tasks) {
 				tasks.Tasks = append(tasks.Tasks[:index], tasks.Tasks[index+1:]...)
+				fmt.Println("Task added deleted")
 			}
 			tasks.Unlock()
 		}
@@ -90,6 +92,7 @@ func updateHandler(w http.ResponseWriter, r *http.Request) {
 			tasks.Lock()
 			if index >= 0 && index < len(tasks.Tasks) {
 				tasks.Tasks[index].Name = newName
+				fmt.Println("Task updated to " + newName)
 			}
 			tasks.Unlock()
 		}
@@ -101,6 +104,7 @@ func deleteAllHandler(w http.ResponseWriter, r *http.Request) {
 	if r.Method == http.MethodPost {
 		tasks.Lock()
 		tasks.Tasks = nil
+		fmt.Println("All tasks deleted")
 		tasks.Unlock()
 	}
 	http.Redirect(w, r, "/", http.StatusSeeOther)
@@ -118,6 +122,7 @@ func saveHandler(w http.ResponseWriter, r *http.Request) {
 
 		err := os.WriteFile("savedTasks.json", item, 0644)
 		check(err)
+		fmt.Println("Tasks saved to file")
 	}
 
 	http.Redirect(w, r, "/", http.StatusSeeOther)
@@ -146,6 +151,7 @@ func readHandler(w http.ResponseWriter, r *http.Request) {
 					break
 				}
 			}
+			fmt.Println("Task file read and added to slice")
 		}
 	}
 
