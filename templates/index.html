@@ -16,12 +16,11 @@
             <form action="/load" method="post">
                 <button type="submit" class="control-btn">Load Tasks</button>
             </form>
-            <form action="deleteAll" method="post">
+            <form action="/deleteAll" method="post">
                 <button type="submit" class="delete-all-btn">Delete All</button>
             </form>
             <form action="/save" method="post">
                 <button type="submit" class="control-btn">Save Tasks</button>
-                <h1 name="error" class="error"></h1>
             </form>
             <form action="/add" method="post" class="add-form">
                 <input type="text" name="task" placeholder="Enter new task" required>
@@ -34,6 +33,11 @@
                 {{range $index, $task := .}}
                 <li class="task-item">
                     <span>{{.Name}}</span>
+                    <form action="/update" method="post" class="update-form">
+                        <input type="hidden" name="index" value="{{$index}}">
+                        <input type="text" name="newName" placeholder="New task name" required>
+                        <button type="submit" class="update-btn">Update</button>
+                    </form>
                     <form action="/delete" method="post" class="delete-form">
                         <input type="hidden" name="index" value="{{$index}}">
                         <button type="submit" class="delete-btn">Delete</button>

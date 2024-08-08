@@ -1,3 +1,4 @@
+/* Base Styles */
 body {
     font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
     margin: 0;
@@ -71,6 +72,7 @@ ul {
     padding: 0;
 }
 
+/* Task Item Styles */
 .task-item {
     display: flex;
     justify-content: space-between;
@@ -88,7 +90,8 @@ ul {
     color: #868e96;
 }
 
-.delete-btn {
+/* Delete Button Styles */
+.delete-btn{
     padding: 6px 10px;
     font-size: 14px;
     background-color: #dc3545;
@@ -114,6 +117,37 @@ ul {
     background-color: #c82333;
 }
 
+/* Update Button Styles */
+.update-btn {
+    padding: 6px 10px;
+    font-size: 14px;
+    background-color: #28a745;
+    color: white;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+    transition: background-color 0.3s;
+}
+
+.update-btn:hover {
+    background-color: #218838;
+}
+
+/* Update Form Styles */
+.update-form {
+    display: flex;
+    gap: 10px;
+    align-items: center;
+}
+
+.update-form input[type="text"] {
+    padding: 5px;
+    font-size: 14px;
+    border: 1px solid #ced4da;
+    border-radius: 4px;
+}
+
+/* Error Message Styles */
 .error {
     color: #dc3545;
     font-size: 0.9rem;
