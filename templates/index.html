@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>To-Do List</title>
+    <link rel="stylesheet" href="/static/style.css">
+</head>
+<body>
+    <h1>To-Do List</h1>
+    <form action="/load" method="post">
+        <button type="submit">load</button>
+    </form>
+    <form action="/save" method="post">
+        <button type="submit">save</button>
+        <h1 name="error"></h1>
+    </form>
+    <form action="/add" method="post">
+        <input type="text" name="task" placeholder="Enter new task" required>
+        <button type="submit">Add Task</button>
+    </form>
+    <ul>
+        {{range $index, $task := .}}
+        <li>
+            {{.Name}}
+            <form action="/delete" method="post" style="display:inline;">
+                <input type="hidden" name="index" value="{{$index}}">
+                <button type="submit">Delete</button>
+            </form>
+        </li>
+        {{else}}
+        <li>No tasks yet</li>
+        {{end}}
+    </ul>
+</body>
+</html>
