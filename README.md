@@ -4,7 +4,7 @@
 
 ## Overview
 
-This is a simple Todo application written in Go. The app allows users to create, view and delete tasks. It uses a minimal web server and basic file-based storage to manage tasks.
+This is a simple Todo application written in Go. The app allows users to create, view, update and delete tasks. It uses a minimal web server and basic file-based storage to manage tasks.
 
 ## Getting Started
 
@@ -55,8 +55,9 @@ This will execute all the tests and provide verbose output.
 
 ## Features
 
-- **Add a Todo**: Create a new task with a description.
+- **Add a Todo**: Create a new task with a name.
 - **View Todos**: Display all existing tasks.
+- **Update Todos**: Update the name of the todos.
 - **Delete a Todo**: Remove a task from the list.
 
 ## Configuration
