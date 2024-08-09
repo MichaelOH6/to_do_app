@@ -30,7 +30,7 @@ func main() {
 	http.HandleFunc("/", indexHandler)
 	http.HandleFunc("/add", addHandler)
 	http.HandleFunc("/delete", deleteHandler)
-	http.HandleFunc("/update", updateHandler) // Add this line
+	http.HandleFunc("/update", updateHandler)
 	http.HandleFunc("/save", saveHandler)
 	http.HandleFunc("/load", readHandler)
 	http.HandleFunc("/deleteAll", deleteAllHandler)
